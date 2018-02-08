@@ -1,7 +1,7 @@
 Package: rpocket
 Version: 0.0.0.9000
 Title: Retrive Pocket Data
-Description: This package gets a users pocket data and with helpful functions to make analysis easier.
+Description: Retrives a users pocket data and creates digestable dataframes.
 Authors@R: person("Kayla", "Patel", email = "paylakatel@gmail.com", role = c("aut", "cre"))
 License: What license is it under?
 Encoding: UTF-8
@@ -10,5 +10,8 @@ ByteCompile: true
 Imports:
     jsonlite,
     testthat,
-    data.table
+    data.table,
+    purrr,
+    dplyr,
+    stringr
 RoxygenNote: 6.0.1

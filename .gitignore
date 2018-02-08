@@ -3,3 +3,4 @@
 .RData
 keys.r
 .DS_Store
+.Rapp.history

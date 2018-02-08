@@ -1,5 +1,6 @@
-#' Title
+#' Get Data
 #'
+#' This function retrives a user's pocket data and returns a nested list.
 #' @param consumer_key pocket provided consumer key
 #' @param access_token pocket provided access token
 #' @param since unix timestamp to return items modified since date, no value calls everything
