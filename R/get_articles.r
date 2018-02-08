@@ -4,6 +4,10 @@
 #' @param data large nested list returned from pocket
 #'
 #' @return dataframe of articles
+#' Cleaning includes:
+#'  - unix dates to datetimes
+#'  - adding organization field which does its best to get the organization from the resolved_url field
+#'  - word_count field as integer
 #'
 #' @export
 #'
@@ -23,5 +27,18 @@ get_articles <- function(data) {
 
   # return dataframe
   articles <- data.table::rbindlist(articles_truncated)
+
+  # clean up dates
+  articles <- articles %>%
+    dplyr::mutate(date_added=as.POSIXct(as.integer(time_added),origin = "1970-01-01",tz = "GMT"),
+                  date_updated=as.POSIXct(as.integer(time_updated),origin = "1970-01-01",tz = "GMT"),
+                  date_read=as.POSIXct(as.integer(time_read),origin = "1970-01-01",tz = "GMT"),
+                  date_favorited=as.POSIXct(as.integer(time_favorited),origin = "1970-01-01",tz = "GMT"))
+
+  # get organization website domain - strip out everyting around domain
+  articles <- articles %>% dplyr::mutate(organization=gsub(".*//|/.*|www.|.com|blog.|blogs.|.org|.co.uk|medium.|news.|apps.|.de|story.|.co|.net|highline.",
+                                                           "", resolved_url),
+                                         word_count = as.integer(word_count))
+
   return(articles)
 }

@@ -11,5 +11,7 @@ Imports:
     jsonlite,
     testthat,
     data.table,
-    purrr
+    purrr,
+    dplyr,
+    stringr
 RoxygenNote: 6.0.1

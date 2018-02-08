@@ -4,6 +4,8 @@
 #' @param data large nested list returned from pocket
 #'
 #' @return dataframe of authors with one row per author and an "item id" field to join with the articles dataframe.
+#' Converts all author names to Title Case
+#'
 #' @export
 #'
 #' @examples
@@ -18,5 +20,9 @@ get_authors <- function(data) {
 
   # return dataframe
   authors <- data.table::rbindlist(flat, fill=TRUE)
+
+  # clean author names
+  authors <- authors %>% mutate(name=stringr::str_to_title(name))
+
   return(authors)
 }
